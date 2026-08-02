@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=devtools://devtools/bundled/devtools_app.html?remoteBase=https://chrome-devtools-frontend.appspot.com/serve_file/@30f6543ae91e6a860e73b76e3216b663b050f4e5/&targetType=tab&can_dock=true
+HostUrl=about:internet
