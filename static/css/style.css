@@ -16,6 +16,10 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     color: var(--text-dark);
     background-color: #ffffff;
@@ -341,7 +345,6 @@ ul {
     height: 25px;
 }
 
-/* Marquee Carousel Styles */
 .marquee-container {
     overflow: hidden;
     white-space: nowrap;
@@ -352,11 +355,14 @@ ul {
 .marquee-content {
     display: flex;
     flex-shrink: 0;
+    white-space: nowrap;
     animation: marquee 40s linear infinite;
 }
 
 .marquee-item {
     padding-right: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 @keyframes marquee {
@@ -368,7 +374,155 @@ ul {
     }
 }
 
-/* Products Section */
+/* ===== CATALOG & CAROUSELS ===== */
+.catalog-section {
+    padding: 30px 40px; /* Reducido para juntar las secciones */
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.catalog-section h2 {
+    text-align: center;
+    font-size: 32px;
+    color: var(--gold-color);
+    margin-bottom: 10px;
+}
+
+.catalog-section p.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px; /* Reducido para acercar el carrusel al título */
+}
+
+.carousel-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 30px;
+    padding-bottom: 20px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold-color) #f0f0f0;
+}
+
+/* Utilidad para centrar cuando hay pocos elementos, de forma segura */
+.carousel-centered {
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .carousel-centered {
+        justify-content: flex-start; /* En móvil dejamos que fluyan normal para no romper el scroll */
+    }
+}
+
+.carousel-container::-webkit-scrollbar {
+    height: 8px;
+}
+.carousel-container::-webkit-scrollbar-track {
+    background: #f0f0f0; 
+    border-radius: 4px;
+}
+.carousel-container::-webkit-scrollbar-thumb {
+    background-color: var(--gold-color); 
+    border-radius: 4px;
+}
+
+.carousel-item {
+    flex: 0 0 calc(25% - 22.5px); /* 4 elementos por fila en pantallas grandes */
+    scroll-snap-align: start;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 0; /* Quitamos el padding para que la imagen ocupe todo el ancho */
+    text-align: center;
+    transition: box-shadow 0.3s;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Para que la imagen respete los bordes curvos */
+}
+
+.carousel-item:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto; /* Permite que la imagen crezca verticalmente y ocupe todo el ancho */
+    margin-bottom: 0;
+    transition: transform 0.4s ease;
+    cursor: pointer; /* Indica que se puede hacer clic */
+}
+
+.carousel-item:hover img {
+    transform: scale(1.05); /* Efecto de zoom suave al pasar el mouse */
+}
+
+/* Contenedor para el texto y botón debajo de la foto */
+.carousel-item-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: flex-start; /* Mantiene el texto pegado a la imagen en lugar de empujarlo al fondo */
+}
+
+.carousel-item h4 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+/* ===== MODAL DE IMAGEN (LIGHTBOX) ===== */
+.modal-overlay {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px); /* Fondo borroso */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90vh;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    object-fit: contain;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.modal-close:hover {
+    color: var(--gold-color);
+}
+
+.carousel-item p.specs {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.carousel-item .price {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+/* Original Products Section (Hide if replacing, but we keep for now just in case) */
 .products-section {
     padding: 60px 40px;
     max-width: 1400px;
@@ -865,8 +1019,18 @@ ul {
         text-align: left;
     }
 
+    .carousel-item {
+        flex: 0 0 calc(50% - 15px);
+    }
+
     .footer-content {
         grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (max-width: 1200px) {
+    .carousel-item {
+        flex: 0 0 calc(33.333% - 20px); /* 3 elementos por fila en tablets grandes */
     }
 }
 
@@ -876,6 +1040,14 @@ ul {
     .info-cards,
     .banner-split {
         grid-template-columns: 1fr;
+    }
+
+    .catalog-section {
+        padding: 40px 20px;
+    }
+    
+    .carousel-item {
+        flex: 0 0 85%;
     }
 
     /* --- HERO MOBILE: panel flotando DENTRO de la foto (arriba) --- */
