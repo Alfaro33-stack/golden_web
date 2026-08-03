@@ -34,4 +34,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 2000);
         });
     });
+
+    // Mobile Footer Accordion
+    const accordionHeaders = document.querySelectorAll('.accordion-col h4');
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                const parent = header.parentElement;
+                parent.classList.toggle('active');
+            }
+        });
+    });
 });
