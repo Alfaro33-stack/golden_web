@@ -20,18 +20,50 @@ document.addEventListener('DOMContentLoaded', () => {
     if (drawerClose) drawerClose.addEventListener('click', closeDrawer);
     if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
 
-    // Add subtle animation to Add to Cart buttons
+    // Configurar botones de WhatsApp para productos
     const cartButtons = document.querySelectorAll('.btn-add-cart');
+    const phoneNumber = "51939030861"; // Tu número de WhatsApp
+
     cartButtons.forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
-            const originalText = this.innerText;
-            this.innerText = '¡AGREGADO!';
-            this.style.backgroundColor = '#25D366';
-            setTimeout(() => {
-                this.innerText = originalText;
-                this.style.backgroundColor = '';
-            }, 2000);
+            
+            let productName = "";
+            let categoryName = "";
+            
+            // Buscar la sección y la tarjeta actual
+            const card = this.closest('.carousel-item');
+            const section = this.closest('.catalog-section');
+            
+            if (section) {
+                const sectionTitle = section.querySelector('h2');
+                if (sectionTitle) {
+                    categoryName = sectionTitle.textContent.trim();
+                }
+            }
+
+            if (card) {
+                const h4 = card.querySelector('h4');
+                const btnText = this.textContent.trim().toUpperCase();
+                
+                if (btnText.includes('CONSULTAR')) {
+                    // Para tarimas: "CONSULTAR MAJESTAD" -> "Tarima MAJESTAD"
+                    // Para Nube: "CONSULTAR NUBE" -> "Tarima NUBE"
+                    productName = "Tarima " + btnText.replace('CONSULTAR', '').trim();
+                } else if (h4) {
+                    // Para colchones: tomar el nombre del título h4
+                    productName = h4.textContent.trim();
+                }
+            }
+            
+            // Construir el mensaje pre-armado
+            const message = `Hola, estoy interesado en el producto: *${productName}* (${categoryName}). ¿Me podrían brindar precios y más información?`;
+            
+            // Crear el enlace a WhatsApp con el texto codificado
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            
+            // Redirigir a WhatsApp
+            window.open(whatsappUrl, '_blank');
         });
     });
 
