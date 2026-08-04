@@ -18,11 +18,15 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    scroll-padding-top: 110px;
 }
 
 body {
     color: var(--text-dark);
     background-color: #ffffff;
+    overflow-x: hidden;
+    padding-top: 110px;
 }
 
 a {
@@ -141,8 +145,10 @@ ul {
     padding: 15px 40px;
     background-color: #ffffff;
     color: var(--primary-color);
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    width: 100%;
     z-index: 1000;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sombra suave para separar del contenido */
 }
@@ -429,6 +435,14 @@ ul {
     border-radius: 4px;
 }
 
+@media (min-width: 769px) {
+    .carousel-container.wrap-desktop {
+        flex-wrap: wrap;
+        overflow-x: visible;
+        justify-content: center;
+    }
+}
+
 .carousel-item {
     flex: 0 0 calc(25% - 22.5px); /* 4 elementos por fila en pantallas grandes */
     scroll-snap-align: start;
@@ -637,209 +651,388 @@ ul {
     cursor: pointer;
     border-radius: 4px;
     transition: background-color 0.3s;
+    margin-top: auto;
+}
+
+.carousel-item-content > div {
+    margin-top: auto !important;
 }
 
 .btn-add-cart:hover {
     background-color: #333;
 }
 
-/* Banner Splits */
-.banner-split {
+/* Scroll Animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- 1. BLOQUE DE VALOR Y CONFIANZA --- */
+.value-trust-section {
+    background-color: #faf9f6;
+    padding: 60px 20px;
+}
+
+.value-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.value-card {
+    background: white;
+    padding: 35px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    border: 1px solid rgba(191, 161, 95, 0.1);
+    transition: transform 0.3s;
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+}
+
+.value-card i {
+    font-size: 40px;
+    color: var(--gold-color);
+    margin-bottom: 15px;
+}
+
+.value-card h4 {
+    font-size: 18px;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.value-card p {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+/* --- 2. SOBRE NUESTRA FÁBRICA --- */
+.about-factory {
+    padding: 80px 20px;
+    background-color: white;
+}
+
+.about-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    padding: 0 40px 40px;
-    max-width: 1400px;
+    gap: 50px;
+    max-width: 1200px;
     margin: 0 auto;
+    align-items: center;
 }
 
-.banner-item {
-    position: relative;
-    height: 250px;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.banner-item img {
+.about-image img {
     width: 100%;
-    height: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     object-fit: cover;
-    transition: transform 0.5s ease;
 }
 
-.banner-item:hover img {
-    transform: scale(1.1);
+.about-text .about-subtitle {
+    color: var(--gold-color);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 10px;
 }
 
-.banner-text {
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    color: white;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
-}
-
-.banner-text h3 {
-    font-size: 28px;
-    font-weight: 800;
+.about-text h2 {
+    font-size: 36px;
+    color: var(--primary-color);
+    margin-bottom: 20px;
     line-height: 1.2;
 }
 
-/* Featured Line */
-.featured-line {
-    margin-bottom: 60px;
+.about-text p {
+    font-size: 16px;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 30px;
 }
 
-.featured-header {
-    background-color: #000000;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.featured-content {
-    height: 400px;
-    background: url('https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
-    display: flex;
-    align-items: center;
-    padding: 0 10%;
-}
-
-.featured-text {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 40px;
-    border-radius: 8px;
-    max-width: 400px;
-}
-
-.featured-text span {
-    background: #333;
-    color: white;
-    padding: 5px 15px;
-    font-size: 14px;
-}
-
-.featured-text h2 {
-    font-size: 48px;
-    font-weight: 800;
-    margin: 15px 0;
+.btn-secondary {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: transparent;
     color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 6px;
+    transition: all 0.3s;
 }
 
-/* Info Cards 3 Cols */
-.info-cards {
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* --- 3. SELECTOR COMPARATIVO --- */
+.comparison-section {
+    background-color: #faf9f6;
+    padding: 80px 20px;
+}
+
+.comparison-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    padding: 0 40px 60px;
-    max-width: 1400px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
-.info-card {
+.comparison-card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
     position: relative;
-    height: 300px;
-    border-radius: 8px;
-    overflow: hidden;
+    border: 1px solid #eee;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.info-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
+.comparison-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
 }
 
-.info-card:hover img {
-    transform: scale(1.1);
+.comparison-card.premium-card {
+    border: 2px solid var(--gold-color);
+    transform: scale(1.05);
+    z-index: 1;
 }
 
-.info-card-text {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #000000;
-    color: var(--gold-color);
-    text-align: center;
-    padding: 20px;
+.comparison-card.premium-card:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.line-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
     font-weight: 700;
-    font-size: 18px;
+    margin-bottom: 15px;
+    background: #e0e0e0;
+    color: #333;
 }
 
-.info-card-text i {
+.line-badge.standar { background: #d0e8f2; color: #0d47a1; }
+.line-badge.premium { background: var(--gold-color); color: white; }
+.line-badge.pocket { background: #333; color: white; }
+
+.comparison-card h4 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.comparison-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.comparison-card ul li {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.4;
+}
+
+.comparison-card ul li i {
     color: var(--gold-color);
+    margin-top: 3px;
 }
 
-.info-card-text small {
-    color: white !important;
-    display: block;
-    font-size: 13px !important;
-    font-weight: 400 !important;
-    margin-top: 4px;
-}
-
-/* Why Choose Us Section */
-.why-choose-us {
-    background-color: var(--bg-light);
+/* --- 4. SHOWCASE DE TARIMAS --- */
+.tarimas-showcase {
     padding: 80px 20px;
-    text-align: center;
+    background-color: white;
 }
 
-.why-choose-us .section-title {
+.showcase-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 50px;
+}
+
+.showcase-header h2 {
     font-size: 36px;
     color: var(--primary-color);
-    margin-bottom: 50px;
-    font-weight: 800;
+    margin-bottom: 15px;
 }
 
-.features-grid {
+.showcase-header p {
+    color: var(--text-light);
+    font-size: 16px;
+}
+
+.showcase-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-.feature-card {
-    background: white;
-    padding: 40px 30px;
+.showcase-card {
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    background: white;
 }
 
-.feature-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+.showcase-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
 }
 
-.feature-card i {
-    font-size: 45px;
-    color: var(--gold-color);
-    margin-bottom: 20px;
+.showcase-content {
+    padding: 25px;
+    text-align: center;
 }
 
-.pe-logo {
-    font-size: 45px;
-    font-weight: 900;
-    color: var(--gold-color);
-    margin-bottom: 20px;
-    line-height: 1;
-}
-
-.feature-card h4 {
+.showcase-content h4 {
     font-size: 20px;
-    margin-bottom: 15px;
-    color: #333;
+    margin-bottom: 10px;
 }
 
-.feature-card p {
+.showcase-content p {
+    color: var(--text-light);
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.btn-whatsapp-outline {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid #25D366;
+    color: #25D366;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 6px;
+    transition: all 0.3s;
+}
+
+.btn-whatsapp-outline:hover {
+    background-color: #25D366;
+    color: white;
+}
+
+/* --- 5. FAQ & CTA BANNER --- */
+.faq-cta-section {
+    padding: 80px 20px 40px;
+    background-color: #faf9f6;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto 60px;
+}
+
+.accordion-item {
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    overflow: hidden;
+}
+
+.accordion-header {
+    width: 100%;
+    text-align: left;
+    padding: 20px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.accordion-header:hover {
+    background-color: #fcfcfc;
+}
+
+.accordion-header i {
+    color: var(--gold-color);
+    transition: transform 0.3s;
+}
+
+.accordion-header.active i {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    padding: 0 20px;
+    background: white;
+}
+
+.accordion-content.active {
+    padding: 20px;
+}
+
+.accordion-content p {
+    color: var(--text-light);
     font-size: 15px;
-    color: #666;
     line-height: 1.6;
+}
+
+.cta-banner {
+    background: linear-gradient(135deg, var(--primary-color), #222);
+    padding: 60px 20px;
+    text-align: center;
+    color: white;
+}
+
+.cta-content h3 {
+    font-size: 28px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.btn-whatsapp-solid {
+    display: inline-block;
+    background-color: #25D366;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-whatsapp-solid:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
 }
 
 /* Newsletter */
@@ -998,27 +1191,63 @@ ul {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     z-index: 1000;
     transition: transform 0.3s;
+    text-decoration: none;
 }
 
 .whatsapp-fixed:hover {
     transform: scale(1.1);
 }
 
+.whatsapp-tooltip {
+    position: absolute;
+    right: 75px;
+    top: 50%;
+    transform: translateY(-50%) scale(0.9);
+    background-color: white;
+    color: #333;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.whatsapp-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -6px;
+    transform: translateY(-50%);
+    border-width: 6px 0 6px 6px;
+    border-style: solid;
+    border-color: transparent transparent transparent white;
+}
+
+.whatsapp-fixed:hover .whatsapp-tooltip {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
 
     .product-grid,
-    .info-cards {
+    .value-grid,
+    .comparison-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .why-different {
-        flex-direction: column;
-        text-align: center;
+    .comparison-card.premium-card {
+        transform: none;
     }
 
-    .why-item {
-        text-align: left;
+    .comparison-card.premium-card:hover {
+        transform: translateY(-5px);
     }
 
     .carousel-item {
@@ -1039,9 +1268,15 @@ ul {
 @media (max-width: 768px) {
 
     .product-grid,
-    .info-cards,
-    .banner-split {
+    .comparison-grid,
+    .about-container,
+    .showcase-grid {
         grid-template-columns: 1fr;
+    }
+
+    .value-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
     }
 
     .catalog-section {
