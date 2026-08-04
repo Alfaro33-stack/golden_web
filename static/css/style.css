@@ -521,6 +521,55 @@ ul {
     transition: color 0.3s;
 }
 
+/* Modal Legal Content */
+.legal-modal-content {
+    background-color: white;
+    width: 90%;
+    max-width: 700px;
+    max-height: 85vh;
+    padding: 40px;
+    border-radius: 12px;
+    position: relative;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+.legal-modal-content h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 26px;
+    border-bottom: 2px solid var(--gold-color);
+    padding-bottom: 15px;
+}
+
+.legal-text-content p {
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.modal-close-legal {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 35px;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.3s;
+    line-height: 1;
+}
+
+.modal-close-legal:hover {
+    color: var(--gold-color);
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 .modal-close:hover {
     color: var(--gold-color);
 }
@@ -1198,39 +1247,35 @@ ul {
     transform: scale(1.1);
 }
 
-.whatsapp-tooltip {
-    position: absolute;
-    right: 75px;
-    top: 50%;
-    transform: translateY(-50%) scale(0.9);
+.whatsapp-pointer {
+    position: fixed;
+    right: 100px;
+    bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     background-color: white;
-    color: #333;
+    color: var(--primary-color);
     padding: 8px 15px;
     border-radius: 20px;
     font-size: 14px;
     font-weight: 700;
     font-family: 'Montserrat', sans-serif;
-    white-space: nowrap;
-    opacity: 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    z-index: 1000;
+    animation: bouncePointer 2s infinite;
     pointer-events: none;
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-.whatsapp-tooltip::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: -6px;
-    transform: translateY(-50%);
-    border-width: 6px 0 6px 6px;
-    border-style: solid;
-    border-color: transparent transparent transparent white;
+.whatsapp-pointer i {
+    color: #25D366;
+    font-size: 18px;
 }
 
-.whatsapp-fixed:hover .whatsapp-tooltip {
-    opacity: 1;
-    transform: translateY(-50%) scale(1);
+@keyframes bouncePointer {
+    0%, 20%, 50%, 80%, 100% { transform: translateX(0); }
+    40% { transform: translateX(-15px); }
+    60% { transform: translateX(-7px); }
 }
 
 /* Responsive */

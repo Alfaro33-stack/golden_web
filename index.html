@@ -126,7 +126,7 @@
         <div class="hero-panel">
             <h1>EL SOPORTE<br><span>perfecto</span></h1>
             <p>La dupla ideal para un descanso firme y duradero.</p>
-            <a href="#" class="btn-hero">DESCUBRE</a>
+            <a href="#tarimas" class="btn-hero">DESCUBRE</a>
         </div>
         <!-- Imagen visible solo en móvil -->
         <div class="hero-image-mobile"></div>
@@ -575,11 +575,11 @@
             <div class="footer-col accordion-col" id="col-legales">
                 <h4 class="footer-heading">LEGALES <i class="fa-solid fa-plus mobile-only"></i></h4>
                 <ul class="footer-list">
-                    <li><a href="#">Políticas de Privacidad</a></li>
-                    <li><a href="#">Políticas de Cookies</a></li>
-                    <li><a href="#">Políticas de Tratamiento de Datos</a></li>
-                    <li><a href="#">Términos y Condiciones</a></li>
-                    <li><a href="#">Políticas de Envío</a></li>
+                    <li><a href="#" class="legal-link" data-title="Políticas de Privacidad">Políticas de Privacidad</a></li>
+                    <li><a href="#" class="legal-link" data-title="Políticas de Cookies">Políticas de Cookies</a></li>
+                    <li><a href="#" class="legal-link" data-title="Políticas de Tratamiento de Datos">Políticas de Tratamiento de Datos</a></li>
+                    <li><a href="#" class="legal-link" data-title="Términos y Condiciones">Términos y Condiciones</a></li>
+                    <li><a href="#" class="legal-link" data-title="Políticas de Envío">Políticas de Envío</a></li>
                 </ul>
             </div>
 
@@ -614,11 +614,14 @@
         </div>
     </footer>
 
-    <!-- WhatsApp Button -->
+    <!-- WhatsApp Button & Pointer -->
+    <div class="whatsapp-pointer">
+        <span>¡Cotiza aquí!</span>
+        <i class="fa-solid fa-hand-point-right"></i>
+    </div>
     <a href="https://wa.me/51939030861?text=Hola%2C%20vi%20unos%20colchones%20que%20me%20gustaron%2C%20%C2%BFme%20pueden%20dar%20informaci%C3%B3n%20de%20los%20precios%3F"
         class="whatsapp-fixed" target="_blank">
         <i class="fa-brands fa-whatsapp"></i>
-        <span class="whatsapp-tooltip">¡Cotiza aquí!</span>
     </a>
 
     <!-- Scripts -->
@@ -628,6 +631,17 @@
     <div id="image-modal" class="modal-overlay">
         <span class="modal-close">&times;</span>
         <img class="modal-content" id="modal-img">
+    </div>
+
+    <!-- Legal Modal -->
+    <div id="legal-modal" class="modal-overlay">
+        <div class="legal-modal-content">
+            <span class="modal-close-legal">&times;</span>
+            <h2 id="legal-modal-title">Título Legal</h2>
+            <div id="legal-modal-body" class="legal-text-content">
+                <p>Aquí irá el contenido detallado de la política.</p>
+            </div>
+        </div>
     </div>
 
     <script>
