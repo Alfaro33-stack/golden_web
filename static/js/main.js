@@ -16,7 +16,15 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = '';
     }
 
-    if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openDrawer);
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', () => {
+            if (drawer.classList.contains('open')) {
+                closeDrawer();
+            } else {
+                openDrawer();
+            }
+        });
+    }
     if (drawerClose) drawerClose.addEventListener('click', closeDrawer);
     if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
 
