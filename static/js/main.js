@@ -126,11 +126,11 @@ document.addEventListener('DOMContentLoaded', () => {
             carousel.scrollLeft = scrollLeft - walk;
         });
         
-        startAutoScroll();
+        // startAutoScroll(); // Deshabilitado para evitar temblor con CSS scroll-snap y lag en móviles
         
         window.addEventListener('resize', () => {
             stopAutoScroll();
-            startAutoScroll();
+            // startAutoScroll(); // Deshabilitado para evitar temblor con CSS scroll-snap y lag en móviles
         });
     });
 
