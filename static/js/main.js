@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Configurar botones de WhatsApp para productos
     const cartButtons = document.querySelectorAll('.btn-add-cart');
-    const phoneNumber = "51939030861"; // Tu número de WhatsApp
+    const phoneNumber = "51988794863"; // Tu número de WhatsApp
 
     cartButtons.forEach(btn => {
         btn.addEventListener('click', function (e) {
